@@ -1,0 +1,9 @@
+{
+  "binary": "mcjtylib-26.1.2-10.0.0-atm11.jar",
+  "sha256": "9d6af511138ebc03c2ae8af17ece96dddad33d0ba3b6817ee475bfb33475427b",
+  "decompiler": "Vineflower 1.11.2",
+  "javaFiles": 292,
+  "filesWithDecompilerFailureMarkers": [],
+  "recompilationVerified": false,
+  "originalModifiedSourceRecovered": false
+}

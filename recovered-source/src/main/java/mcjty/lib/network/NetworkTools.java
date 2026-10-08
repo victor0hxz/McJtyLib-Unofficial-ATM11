@@ -1,0 +1,129 @@
+package mcjty.lib.network;
+
+import io.netty.buffer.ByteBuf;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.annotation.Nonnull;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.FluidStack;
+
+public class NetworkTools {
+   public static FluidStack readFluidStack(RegistryFriendlyByteBuf dataIn) {
+      return (FluidStack)FluidStack.OPTIONAL_STREAM_CODEC.decode(dataIn);
+   }
+
+   public static void writeFluidStack(RegistryFriendlyByteBuf dataOut, FluidStack fluidStack) {
+      FluidStack.OPTIONAL_STREAM_CODEC.encode(dataOut, fluidStack);
+   }
+
+   public static String readStringUTF8(FriendlyByteBuf dataIn) {
+      return !dataIn.readBoolean() ? null : dataIn.readUtf(32767);
+   }
+
+   public static void writeStringUTF8(FriendlyByteBuf dataOut, String str) {
+      if (str == null) {
+         dataOut.writeBoolean(false);
+      } else {
+         dataOut.writeBoolean(true);
+         dataOut.writeUtf(str);
+      }
+   }
+
+   public static void writeStringList(FriendlyByteBuf dataOut, @Nonnull List<String> list) {
+      dataOut.writeInt(list.size());
+      list.forEach(s -> writeStringUTF8(dataOut, s));
+   }
+
+   @Nonnull
+   public static List<String> readStringList(FriendlyByteBuf dataIn) {
+      int size = dataIn.readInt();
+      List<String> list = new ArrayList<>(size);
+
+      for (int i = 0; i < size; i++) {
+         list.add(readStringUTF8(dataIn));
+      }
+
+      return list;
+   }
+
+   public static ItemStack readItemStack(RegistryFriendlyByteBuf buf) {
+      ItemStack stack = (ItemStack)ItemStack.OPTIONAL_STREAM_CODEC.decode(buf);
+      stack.setCount(buf.readInt());
+      return stack;
+   }
+
+   public static void writeItemStack(RegistryFriendlyByteBuf buf, ItemStack itemStack) {
+      ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, itemStack);
+      buf.writeInt(itemStack.getCount());
+   }
+
+   public static <T extends Enum<T>> void writeEnum(ByteBuf buf, T value, T nullValue) {
+      if (value == null) {
+         buf.writeInt(nullValue.ordinal());
+      } else {
+         buf.writeInt(value.ordinal());
+      }
+   }
+
+   public static <T extends Enum<T>> T readEnum(ByteBuf buf, T[] values) {
+      return values[buf.readInt()];
+   }
+
+   public static <T extends Enum<T>> void writeEnumCollection(ByteBuf buf, Collection<T> collection) {
+      buf.writeInt(collection.size());
+
+      for (T type : collection) {
+         buf.writeInt(type.ordinal());
+      }
+   }
+
+   public static <T extends Enum<T>> void readEnumCollection(ByteBuf buf, Collection<T> collection, T[] values) {
+      collection.clear();
+      int size = buf.readInt();
+
+      for (int i = 0; i < size; i++) {
+         collection.add(values[buf.readInt()]);
+      }
+   }
+
+   @Nonnull
+   public static List<ItemStack> readItemStackList(RegistryFriendlyByteBuf buf) {
+      int size = buf.readInt();
+      List<ItemStack> outputs = new ArrayList<>(size);
+
+      for (int i = 0; i < size; i++) {
+         outputs.add(readItemStack(buf));
+      }
+
+      return outputs;
+   }
+
+   public static void writeItemStackList(RegistryFriendlyByteBuf buf, @Nonnull List<ItemStack> outputs) {
+      buf.writeInt(outputs.size());
+
+      for (ItemStack output : outputs) {
+         writeItemStack(buf, output);
+      }
+   }
+
+   public static void writeBlockPosList(FriendlyByteBuf dataOut, @Nonnull List<BlockPos> list) {
+      dataOut.writeInt(list.size());
+      list.forEach(dataOut::writeBlockPos);
+   }
+
+   @Nonnull
+   public static List<BlockPos> readBlockPosList(FriendlyByteBuf dataIn) {
+      int size = dataIn.readInt();
+      List<BlockPos> list = new ArrayList<>(size);
+
+      for (int i = 0; i < size; i++) {
+         list.add(dataIn.readBlockPos());
+      }
+
+      return list;
+   }
+}

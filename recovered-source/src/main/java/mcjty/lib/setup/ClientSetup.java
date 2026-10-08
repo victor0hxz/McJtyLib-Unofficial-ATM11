@@ -1,0 +1,27 @@
+package mcjty.lib.setup;
+
+import mcjty.lib.ClientEventHandler;
+import mcjty.lib.keys.KeyBindings;
+import mcjty.lib.keys.KeyInputHandler;
+import mcjty.lib.tooltips.ClientTooltipIcon;
+import mcjty.lib.tooltips.TooltipRender;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
+
+public class ClientSetup {
+   public static void init(FMLClientSetupEvent e) {
+      NeoForge.EVENT_BUS.register(new TooltipRender());
+      NeoForge.EVENT_BUS.register(new ClientEventHandler());
+      NeoForge.EVENT_BUS.register(new KeyInputHandler());
+   }
+
+   public static void registerKeyBinds(RegisterKeyMappingsEvent event) {
+      KeyBindings.init(event);
+   }
+
+   public static void registerClientComponentTooltips(RegisterClientTooltipComponentFactoriesEvent event) {
+      event.register(ClientTooltipIcon.class, a -> a);
+   }
+}

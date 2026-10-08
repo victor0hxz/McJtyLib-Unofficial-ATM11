@@ -1,0 +1,76 @@
+package mcjty.lib.blockcommands;
+
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import mcjty.lib.network.NetworkTools;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.FluidStack;
+
+public interface ISerializer<T> {
+   Function<RegistryFriendlyByteBuf, T> getDeserializer();
+
+   BiConsumer<RegistryFriendlyByteBuf, T> getSerializer();
+
+   public static class BlockPosSerializer implements ISerializer<BlockPos> {
+      @Override
+      public Function<RegistryFriendlyByteBuf, BlockPos> getDeserializer() {
+         return buf -> buf.readBlockPos();
+      }
+
+      @Override
+      public BiConsumer<RegistryFriendlyByteBuf, BlockPos> getSerializer() {
+         return (buf, pos) -> buf.writeBlockPos(pos);
+      }
+   }
+
+   public static class FluidStackSerializer implements ISerializer<FluidStack> {
+      @Override
+      public Function<RegistryFriendlyByteBuf, FluidStack> getDeserializer() {
+         return buf -> NetworkTools.readFluidStack(buf);
+      }
+
+      @Override
+      public BiConsumer<RegistryFriendlyByteBuf, FluidStack> getSerializer() {
+         return (buf, fluid) -> NetworkTools.writeFluidStack(buf, fluid);
+      }
+   }
+
+   public static class IntegerSerializer implements ISerializer<Integer> {
+      @Override
+      public Function<RegistryFriendlyByteBuf, Integer> getDeserializer() {
+         return FriendlyByteBuf::readInt;
+      }
+
+      @Override
+      public BiConsumer<RegistryFriendlyByteBuf, Integer> getSerializer() {
+         return FriendlyByteBuf::writeInt;
+      }
+   }
+
+   public static class ItemStackSerializer implements ISerializer<ItemStack> {
+      @Override
+      public Function<RegistryFriendlyByteBuf, ItemStack> getDeserializer() {
+         return NetworkTools::readItemStack;
+      }
+
+      @Override
+      public BiConsumer<RegistryFriendlyByteBuf, ItemStack> getSerializer() {
+         return NetworkTools::writeItemStack;
+      }
+   }
+
+   public static class StringSerializer implements ISerializer<String> {
+      @Override
+      public Function<RegistryFriendlyByteBuf, String> getDeserializer() {
+         return buf -> buf.readUtf(32767);
+      }
+
+      @Override
+      public BiConsumer<RegistryFriendlyByteBuf, String> getSerializer() {
+         return FriendlyByteBuf::writeUtf;
+      }
+   }
+}

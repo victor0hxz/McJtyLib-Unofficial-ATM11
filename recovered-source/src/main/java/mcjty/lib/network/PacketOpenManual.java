@@ -1,0 +1,43 @@
+package mcjty.lib.network;
+
+import mcjty.lib.compat.patchouli.PatchouliCompatibility;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
+public record PacketOpenManual(Identifier manual, Identifier entry, Integer page) implements CustomPacketPayload {
+   public static final Identifier ID = Identifier.fromNamespaceAndPath("mcjtylib", "openmanual");
+   public static final Type<PacketOpenManual> TYPE = new Type(ID);
+   public static final StreamCodec<FriendlyByteBuf, PacketOpenManual> CODEC = StreamCodec.composite(
+      Identifier.STREAM_CODEC,
+      PacketOpenManual::manual,
+      Identifier.STREAM_CODEC,
+      PacketOpenManual::entry,
+      ByteBufCodecs.INT,
+      PacketOpenManual::page,
+      PacketOpenManual::new
+   );
+
+   public static PacketOpenManual create(Identifier manual, Identifier entry, int page) {
+      return new PacketOpenManual(manual, entry, page);
+   }
+
+   public Type<? extends CustomPacketPayload> type() {
+      return TYPE;
+   }
+
+   public void handle(IPayloadContext ctx) {
+      ctx.enqueueWork(() -> handle(this, ctx));
+   }
+
+   private static void handle(PacketOpenManual message, IPayloadContext ctx) {
+      Player player = ctx.player();
+      PatchouliCompatibility.openBookEntry((ServerPlayer)player, message.manual, message.entry, message.page);
+   }
+}
