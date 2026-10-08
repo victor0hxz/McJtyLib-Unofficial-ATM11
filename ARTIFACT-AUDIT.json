@@ -1,0 +1,15 @@
+{
+  "modId": "mcjtylib",
+  "originalJar": "mcjtylib-26.1.2-10.0.0-atm11.jar",
+  "originalSha256": "45c49552a409bfa4510f0b58375af5777bfdc9c9d526d24aa202149b32c16801",
+  "sha256": "9d6af511138ebc03c2ae8af17ece96dddad33d0ba3b6817ee475bfb33475427b",
+  "classes": 360,
+  "classMajors": [
+    69
+  ],
+  "archiveIntegrity": "PASS",
+  "licenseUrl": "https://raw.githubusercontent.com/McJtyMods/McJtyLib/1.21_neo/LICENSE",
+  "licenseEmbedded": true,
+  "exactModifiedSourceAvailable": false,
+  "validation": "Previously compiled Java 25 artifact found installed in the ATM11 instance and listed in its mod inventory. ZIP integrity, mod metadata and bytecode version verified. Full gameplay functionality was not retested during publication. The exact modified source tree was not located in the inspected folders."
+}
