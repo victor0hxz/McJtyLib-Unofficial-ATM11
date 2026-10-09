@@ -1,0 +1,6 @@
+{
+  "displayName": "mcjtylib-26.1.2-10.0.0-atm11.jar",
+  "changelog": "Publish the previously compiled unofficial ATM11 compatibility artifact with original MIT notice. Production bytecode unchanged. Gameplay retesting and source recovery remain pending.\n",
+  "changelogType": "markdown",
+  "releaseType": "beta"
+}
