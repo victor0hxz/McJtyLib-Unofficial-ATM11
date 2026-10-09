@@ -1,5 +1,5 @@
 {
-  "name": "McJtyLib - Unofficial ATM11 Fan Build",
+  "name": "McJtyLib Version Locked",
   "summary": "Unofficial fan distribution of McJtyLib for Minecraft 26.1.2.",
   "license": "MIT",
   "modLoader": "NeoForge",
@@ -18,7 +18,7 @@
   "sourceUrl": "https://github.com/victor0hxz/McJtyLib-Version-Locked",
   "game": "Minecraft",
   "class": "Mods",
-  "mainCategory": "Technology",
+  "mainCategory": "API and Library",
   "projectId": 1734200,
   "slug": "mcjtylib-unofficial-atm11-fan-build",
   "curseforgeUrl": "https://www.curseforge.com/minecraft/mc-mods/mcjtylib-unofficial-atm11-fan-build",
@@ -27,8 +27,25 @@
   "fileId": 9105063,
   "fileUrl": "https://www.curseforge.com/minecraft/mc-mods/mcjtylib-unofficial-atm11-fan-build/files/9105063",
   "pendingRelations": [],
-  "profileLogoStatus": "Version Locked PNG published on GitHub; native CurseForge logo replacement not confirmed",
+  "profileLogoStatus": "New Version Locked profile icon confirmed in author dashboard",
   "curseforgeModerationStatus": "Under Review",
   "curseforgeDescriptionStatus": "Exact Version Locked Markdown saved and verified",
-  "curseforgeSourceStatus": "GitHub source URL saved and verified"
+  "curseforgeSourceStatus": "GitHub source URL saved and verified",
+  "projectStatusAtAudit": "New",
+  "fileStatusAtAudit": "Under Review",
+  "bannerUrl": "https://raw.githubusercontent.com/victor0hxz/McJtyLib-Version-Locked/main/publication/BANNER-VERSION-LOCKED.png",
+  "bannerDimensions": [
+    1983,
+    793
+  ],
+  "bannerDisplayWidth": "100%",
+  "curseforgeBannerStatus": "Full-width horizontal banner saved and verified",
+  "bannerGenerationManifest": "version-locked-banner-art.json",
+  "categoryDesired": {
+    "main": "API and Library",
+    "additional": []
+  },
+  "categoryStatus": "saved and verified",
+  "additionalCategories": [],
+  "requiredDependencyCorrection": null
 }
