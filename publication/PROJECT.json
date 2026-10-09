@@ -1,0 +1,27 @@
+{
+  "name": "McJtyLib - Unofficial ATM11 Fan Build",
+  "summary": "Unofficial fan distribution of McJtyLib for Minecraft 26.1.2.",
+  "license": "MIT",
+  "modLoader": "NeoForge",
+  "gameVersions": [
+    "26.1.2"
+  ],
+  "releaseType": "beta",
+  "sourceStatus": "Java implementation recovered by decompilation is published; original modified development source not located.",
+  "upstream": "https://github.com/McJtyMods/McJtyLib/tree/1.21_neo",
+  "issuesUrl": "https://github.com/victor0hxz/McJtyLib-Unofficial-ATM11/issues",
+  "jar": "mcjtylib-26.1.2-10.0.0-atm11.jar",
+  "sha256": "9d6af511138ebc03c2ae8af17ece96dddad33d0ba3b6817ee475bfb33475427b",
+  "dependenciesNotes": "NeoForge 26.1.2.109 and Java 25.",
+  "status": "Created; portal status New; file uploads not yet verified",
+  "sourceAvailability": "Java implementation recovered by decompilation; original modified development project not located; recompilation unverified.",
+  "sourceUrl": "https://github.com/victor0hxz/McJtyLib-Unofficial-ATM11",
+  "game": "Minecraft",
+  "class": "Mods",
+  "mainCategory": "Technology",
+  "projectId": 1734200,
+  "slug": "mcjtylib-unofficial-atm11-fan-build",
+  "curseforgeUrl": "https://www.curseforge.com/minecraft/mc-mods/mcjtylib-unofficial-atm11-fan-build",
+  "publicationTitle": "McJtyLib: Version Locked",
+  "logoSubtitle": "VERSION LOCKED"
+}
